@@ -12,21 +12,9 @@ pool:
 steps:
 
 - task: Maven@3
-  displayName: 'maven Package'
+  displayName: 'maven Package goal'
   inputs:
     mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
-- task: Maven@3
-  displayName: 'maven-verify'
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'verify'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
@@ -35,15 +23,10 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
 
-- task: Maven@3
-  displayName: 'Maven Test'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publishing artifacts'
   inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'test'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
