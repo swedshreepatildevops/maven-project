@@ -35,3 +35,9 @@ steps:
   inputs:
     dockerVersion: '17.09.0-ce'
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'ACR-connection'
+    repository: 'swedacr'
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
