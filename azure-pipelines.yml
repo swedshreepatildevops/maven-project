@@ -30,3 +30,8 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
+- task: DockerInstaller@0
+  displayName: "installing docker on host agent"
+  inputs:
+    dockerVersion: '17.09.0-ce'
+
